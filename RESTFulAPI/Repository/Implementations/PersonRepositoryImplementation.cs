@@ -2,13 +2,13 @@
 using RESTFulAPI.Model.Context;
 using System;
 
-namespace RESTFulAPI.Services.Implementations
+namespace RESTFulAPI.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         private MySQLContext _context;
 
-        public PersonServiceImplementation(MySQLContext context) 
+        public PersonRepositoryImplementation(MySQLContext context) 
         {
             _context = context;
         }
@@ -76,7 +76,7 @@ namespace RESTFulAPI.Services.Implementations
             }
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }

@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using RESTFulAPI.Business.Implementations;
 using RESTFulAPI.Model.Context;
-using RESTFulAPI.Services;
-using RESTFulAPI.Services.Implementations;
+using RESTFulAPI.Business;
+using RESTFulAPI.Repository;
+using RESTFulAPI.Repository.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,8 @@ builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(
 builder.Services.AddApiVersioning();
 
 //Dependency Injection
-builder.Services.AddScoped<IPersonService, PersonServiceImplementation>();
+builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 
 var app = builder.Build();
 
