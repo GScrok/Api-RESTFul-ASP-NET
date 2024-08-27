@@ -1,7 +1,7 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulAPI.Business;
-using RESTFulAPI.Model;
+using RESTFulAPI.Data.VO;
 
 namespace RESTFulAPI.Controllers
 {
@@ -34,14 +34,14 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) { return BadRequest(); }
             return Ok(_personBusiness.Create(person));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) { return BadRequest(); }
             return Ok(_personBusiness.Update(person));

@@ -1,13 +1,13 @@
-﻿using RESTFulAPI.Model;
+﻿using RESTFulAPI.Data.VO;
 
 namespace RESTFulAPI.Business
 {
     public interface IBookBusiness
     {
-        Book Create(Book book);
-        Book FindByID(long book);
-        List<Book> FindAll();
-        Book Update(Book book);
+        BookVO Create(BookVO book);
+        BookVO FindByID(long book);
+        List<BookVO> FindAll();
+        BookVO Update(BookVO book);
         void Delete(long id);
     }
 }
