@@ -8,6 +8,8 @@ using MySqlConnector;
 using Serilog;
 using RESTFulAPI.Repository.Generic;
 using Microsoft.Net.Http.Headers;
+using RESTFulAPI.Hypermedia.Filters;
+using RESTFulAPI.Hypermedia.Enricher;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,11 @@ builder.Services.AddMvc(options =>
     options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
 }).AddXmlSerializerFormatters();
 
+var filterOptions = new HyperMediaFilterOptions();
+filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+
+builder.Services.AddSingleton(filterOptions);
+
 
 // Versoning API
 builder.Services.AddApiVersioning();
@@ -52,6 +59,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
 app.Run();
 

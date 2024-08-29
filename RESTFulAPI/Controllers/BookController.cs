@@ -2,6 +2,7 @@
 using RESTFulAPI.Business;
 using Asp.Versioning;
 using RESTFulAPI.Data.VO;
+using RESTFulAPI.Hypermedia.Filters;
 
 namespace RESTFulAPI.Controllers
 {
@@ -22,12 +23,14 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_bookBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var book = _bookBusiness.FindByID(id);
@@ -36,6 +39,7 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
@@ -43,6 +47,7 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();

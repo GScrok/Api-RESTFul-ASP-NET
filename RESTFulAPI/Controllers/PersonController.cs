@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulAPI.Business;
 using RESTFulAPI.Data.VO;
+using RESTFulAPI.Hypermedia.Filters;
 
 namespace RESTFulAPI.Controllers
 {
@@ -20,6 +21,7 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
@@ -34,6 +36,7 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) { return BadRequest(); }
@@ -41,6 +44,7 @@ namespace RESTFulAPI.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) { return BadRequest(); }
