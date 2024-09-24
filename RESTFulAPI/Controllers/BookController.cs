@@ -3,12 +3,14 @@ using RESTFulAPI.Business;
 using Asp.Versioning;
 using RESTFulAPI.Data.VO;
 using RESTFulAPI.Hypermedia.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RESTFulAPI.Controllers
 {
 
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class BookController : ControllerBase
     {
