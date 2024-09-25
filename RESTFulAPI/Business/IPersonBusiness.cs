@@ -1,4 +1,5 @@
 ﻿using RESTFulAPI.Data.VO;
+using RESTFulAPI.Model;
 
 namespace RESTFulAPI.Business
 {
@@ -8,6 +9,7 @@ namespace RESTFulAPI.Business
         PersonVO FindByID(long id);
         List<PersonVO> FindAll();
         PersonVO Update(PersonVO person);
+        PersonVO Disabled(long id);
         void Delete(long id);
     }
 }
