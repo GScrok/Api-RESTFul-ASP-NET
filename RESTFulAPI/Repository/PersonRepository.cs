@@ -15,7 +15,7 @@ namespace RESTFulAPI.Repository
             if (!_context.Persons.Any(p => p.Id.Equals(id))) return null;
             var user = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
             if (user != null)
-            { 
+            {
                 user.Enabled = false;
                 try
                 {
@@ -28,6 +28,27 @@ namespace RESTFulAPI.Repository
                 }
             }
             return user;
+        }
+
+        public List<Person> FindByName(string firstName, string lastName)
+        {
+            if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
+            {
+                return _context.Persons.Where(p =>
+                    p.FirstName.Contains(firstName) &&
+                    p.LastName.Contains(lastName)).ToList();
+            }
+            else if (!string.IsNullOrEmpty(firstName))
+            {
+                return _context.Persons.Where(p =>
+                    p.FirstName.Contains(firstName)).ToList();
+            }
+            else if (!string.IsNullOrEmpty(lastName))
+            {
+                return _context.Persons.Where(p =>
+                    p.LastName.Contains(lastName)).ToList();
+            }
+            else return null;
         }
     }
 }
