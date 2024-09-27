@@ -21,6 +21,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -133,10 +134,13 @@ builder.Services.AddSwaggerGen(c =>
 
 
 #region Class dependency injection
+
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessRepository>();
 builder.Services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
-builder.Services.AddScoped<IBookBusiness, BookBusinessRepository>();
+builder.Services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
 builder.Services.AddTransient<ITokenService, TokenService>();
 
